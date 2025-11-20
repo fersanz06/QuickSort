@@ -2,23 +2,22 @@ public class QuickSort {
     public static void quickSort(int[] arr, int low, int high) {
         if (low < high) {
             int pi = partition(arr, low, high);
-            quickSort(arr, low, pi - 1);
+            quickSort(arr, low, pi);
             quickSort(arr, pi + 1, high);
         }
     }
 
     private static int partition(int[] arr, int low, int high) {
         int pivot = arr[high];
-        int i = low;
-        int j = high;
-        while (i < j) {
-            while (arr[i] < pivot) i++;
-            while (arr[j] > pivot) j--;
-            if (i < j) {
+        int i = low - 1;
+        for (int j = low; j <= high - 1; j++) {
+            if (arr[j] <= pivot) {
+                i++;
                 swap(arr, i, j);
             }
         }
-        return j;
+        swap(arr, i + 1, high);
+        return i + 1;
     }
 
     private static void swap(int[] arr, int a, int b) {
